@@ -51,7 +51,10 @@ export default function StrudelDemo(){
         const replacement = ProcessText(controlsState)
 
         //Apply the replacement to the song
-        const proc_text_replaced = editorText.replaceAll('<p1_Radio', replacement);
+        let proc_text_replaced = editorText.replaceAll('<p1_Radio>', replacement['<p1_Radio>']);
+
+        //Apply new instrument tag replacement
+        proc_text_replaced = proc_text_replaced.replaceAll('<instrument_tag>', replacement['<instrument_tag>']);
 
         //Send preprocessed code to Strudel Repl
         globalEditor.setCode(proc_text_replaced);
@@ -62,7 +65,7 @@ export default function StrudelDemo(){
 
     //--Audio handlers--
     const handlePlay = () => globalEditor?.evaluate();
-    const ProcAndPlay = () =>  {Proc(); handlePlay(); };
+    const handleProcAndPlay = () =>  {Proc(); handlePlay(); };
     const handleStop = () => globalEditor?.stop();
 
     //--State updates--
@@ -111,7 +114,7 @@ export default function StrudelDemo(){
             return () => {
                 document.removeEventListener("d3Data", handleD3Data);
             };
-    }, [Proc]);
+    }, []);
 
     //--The layout--
    return (
