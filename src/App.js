@@ -13,7 +13,7 @@ import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 import PreProcessingEditor from './components/PreProcessingEditor';
 import AudioControls from './components/AudioControls';
 import PreProcessingControls from './components/PreProcessingControls';
-import strudelRepl from './components/strudelRepl';
+import StrudelRepl from './components/strudelRepl';
 
 let globalEditor = null;
 
@@ -29,7 +29,7 @@ export function ProcessText(controlsState) {
     finalReplacement['<p1_Radio>'] = controlsState.p1_Radio === 'HUSH' ? "_" : "";
 
     //Instrument logic
-    finalReplacement['<instrument_tag>'] = `"{controlsState.instrument}"`;
+    finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
     return finalReplacement;
 }
 
@@ -71,7 +71,7 @@ export default function StrudelDemo(){
     //--State updates--
     const handleControlChange = (controlName, value) => {
         setControlsState(previousState => ({
-            previousState, [controlName]: value
+            ...previousState, [controlName]: value
         }));
     };
     
@@ -114,7 +114,7 @@ export default function StrudelDemo(){
             return () => {
                 document.removeEventListener("d3Data", handleD3Data);
             };
-    }, []);
+    }, [Proc]);
 
     //--The layout--
    return (
@@ -143,7 +143,7 @@ export default function StrudelDemo(){
                     <div className="row">
                         {/* Strudel Repl view */}
                         <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                            <strudelRepl />
+                            <StrudelRepl />
                         </div>
                         {/* Preprocessor controls */}
                         <div className="col-md-4">
