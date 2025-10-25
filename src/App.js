@@ -23,12 +23,14 @@ const handleD3Data = (event) => {
 
 //Preprocessing logic
 export function ProcessText(controlsState) {
-    //Only depends on the controlsState object
-    let replace = "";
-    if (controlsState.p1_Radio === 'HUSH') {
-        replace = "_"
-    }
-    return replace;
+    let finalReplacement = {};
+
+    //P1 radio logic
+    finalReplacement['<p1_Radio>'] = controlsState.p1_Radio === 'HUSH' ? "_" : "";
+
+    //Instrument logic
+    finalReplacement['<instrument_tag>'] = `"{controlsState.instrument}"`;
+    return finalReplacement;
 }
 
 //Main app component
@@ -39,7 +41,7 @@ export default function StrudelDemo(){
     const [editorText, setEditorText] = useState(stranger_tune);
 
     //Hold status of all the controls
-    const [controlsState, setControlsState] = useState({p1_Radio: 'ON',});
+    const [controlsState, setControlsState] = useState({p1_Radio: 'ON', instrument: 'supersaw',});
 
     //Replace the old exported Proc and ProcAndPlay
     const Proc = useCallback(() => {
