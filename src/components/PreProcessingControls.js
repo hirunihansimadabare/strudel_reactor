@@ -1,10 +1,10 @@
 import { control } from '@strudel/core';
 import React from 'react'
 
-//controlState is the current state object
+//controlsState is the current state object
 //onControlChange is the function used to update the control state in App.js
 //onControlUpdate is the function to call ProcAndPlay
-export default function PreProcessingControls({controlState, onControlChange, onControlUpdate}){
+export default function PreProcessingControls({controlsState, onControlChange, onControlUpdate}){
     const handleRadioChange = (value) => {
         onControlChange('p1_Radio', value);
 
@@ -20,7 +20,7 @@ export default function PreProcessingControls({controlState, onControlChange, on
             </div>
 
             <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked={controlState.p1_Radio === 'HUSH'} onChange={() => handleRadioChange('HUSH')} />
+                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked={controlsState.p1_Radio === 'HUSH'} onChange={() => handleRadioChange('HUSH')} />
                 <label className="form-check-label" htmlFor="flexRadioDefault2">p1: HUSH</label>
             </div>
         </>
