@@ -41,7 +41,7 @@ const bass = 0
 
 bassline:
 note(pick(basslines, bass))
-.sound("supersaw")
+.sound(<instrument_tag>)
 .postgain(2)
 .room(0.6)
 .lpf(700)
@@ -51,7 +51,7 @@ note(pick(basslines, bass))
 
 main_arp: 
 note(pick(arpeggiator1, "<0 1 2 3>/2"))
-.sound("supersaw")
+.sound(<instrument_tag>)
 .lpf(300)
 .adsr("0:0:.5:.1")
 .room(0.6)
