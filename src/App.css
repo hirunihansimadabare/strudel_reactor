@@ -36,3 +36,71 @@
     transform: rotate(360deg);
   }
 }
+
+/* Rounded, bordered containers like your sketch */
+.card-box {
+  background: #fff;
+  border: 2px solid #d8d8d8;
+  border-radius: 28px;        /* big rounded corners */
+  padding: 20px;
+}
+
+/* Slightly tighter padding for the small Audio box */
+.card-box.tight {
+  padding: 14px;
+}
+
+/* Section titles centered and subtle */
+.section-title {
+  text-align: center;
+  margin: 0 0 12px 0;
+  font-weight: 600;
+}
+
+/* 2x2 grid for audio control buttons */
+.audio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  grid-auto-rows: minmax(38px, auto);
+  gap: 12px;
+}
+
+/* Make sure that controls fill grid cells */
+.audio-grid > * { width: 100%; }
+.audio-grid button,
+.audio-grid .btn,
+.audio-grid input,
+.audio-grid select { width: 100%; }
+
+/* Make the Strudel demo card short */
+.strudel-card {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;       
+  min-height: 220px;
+  overflow: hidden;    
+}
+
+/* The inner area that scrolls */
+.strudel-repl-scroll {
+  flex: 1 1 auto;    
+  overflow: auto;     
+  min-height: 0;        
+}
+
+/* Make Strudel editor visible and expand */
+#editor, .cm-editor, .cm-content {
+  width: 100% ;
+  height: 100% ;
+  min-height: 320px;
+  display: block;
+}
+
+/* Canvas sits below everything */
+#roll { width: 100%; display: block; position: relative; z-index: 0; }
+
+@media (max-width: 991.98px) {
+  .audio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

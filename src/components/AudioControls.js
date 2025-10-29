@@ -3,8 +3,7 @@ import React from 'react'
 export default function AudioControls({onPlay, onStop, onPreProcess, onProcAndPlay}){
     return (
         <nav>
-            <h4><center>Audio Controls</center></h4>
-            <div className='controls' center>
+            <div className='controls' >
                 <button id="process" className="btn btn-outline-primary" onClick={onPreProcess}>Preprocess</button>
                 <br />
                 <br />

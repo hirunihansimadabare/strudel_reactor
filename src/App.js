@@ -116,50 +116,65 @@ export default function StrudelDemo(){
             };
     }, [Proc]);
 
-    //--The layout--
-   return (
-        <div>
-            <h2>Strudel Demo</h2>
-            <main>
-
-                <div className="container-fluid">
-                    <div className="row">
-                        {/* Preprocessing editor */}
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                            <PreProcessingEditor text={editorText} onTextChange={setEditorText}
-                            />
-                        </div>
-
-                        {/* Audio Controls */}
-                        <div className="col-md-4">
-                            <AudioControls
-                                onPlay={handlePlay}
-                                onStop={handleStop}
-                                onPreProcess={Proc}
-                                onProcAndPlay={handleProcAndPlay}
-                            />
-                        </div>
-                        {/* Preprocessor controls */}
-                        <div className="col-md-4 offset-md-8">
-                            <PreProcessingControls
-                                //Pass all the control values down
-                                controlsState={controlsState}
-                                //Pass the central setter function
-                                onControlChange={handleControlChange}
-                                onControlUpdate={handleProcAndPlay}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        {/* Strudel Repl view */}
-                        <div className="col-md-8" style={{ maxHeight: '60vh', overflowY: 'auto', width: '100%'}}>
-                            <StrudelRepl />
-                        </div>
-                        
-                    </div>
+// --The layout--
+return (
+    <div>
+      <h2 className="visually-hidden">Strudel Demo</h2>
+      <main>
+        <div className="container-fluid">
+          <div className="row g-4 align-items-stretch">
+            {/* Preprocessing editor */}
+            <div className="col-12 col-lg-7 d-flex">
+              <div className="card-box flex-fill" style={{ display: 'flex', flexDirection: 'column' }}>
+                <h5 className="section-title">Preprocessing editor</h5>
+                <div style={{ flexGrow: 1, overflowY: 'auto' }}>
+                  <PreProcessingEditor text={editorText} onTextChange={setEditorText} />
                 </div>
-                <canvas id="roll"></canvas>
-            </main>
+              </div>
+            </div>
+  
+            <div className="col-12 col-lg-5 d-flex flex-column gap-4">
+              {/* Audio controls */}
+              <div className="card-box tight" style={{ flex: '1 0 auto' }}>
+                <h5 className="section-title">Audio Controls</h5>
+                <div className="audio-grid">
+                  <AudioControls
+                    onPlay={handlePlay}
+                    onStop={handleStop}
+                    onPreProcess={Proc}
+                    onProcAndPlay={handleProcAndPlay}
+                  />
+                </div>
+              </div>
+  
+              {/* Radio and instrument swap */}
+              <div className="card-box" style={{ flex: '2 0 auto' }}>
+                <h5 className="section-title">Radio and instrument swap</h5>
+                <PreProcessingControls
+                  controlsState={controlsState}
+                  onControlChange={handleControlChange}
+                  onControlUpdate={handleProcAndPlay}
+                />
+              </div>
+            </div>
+          </div>
+  
+          {/*Strudel demo */}
+          <div className="row g-4 mt-1">
+            <div className="col-12">
+              <div className="card-box strudel-card">
+                <h5 className="section-title">Strudel demo</h5>
+                <div className="strudel-repl-scroll">
+                  <StrudelRepl />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
-}
+  
+        {/* Pianoroll canvas */}
+        <canvas id="roll"></canvas>
+      </main>
+    </div>
+  );
+} 
