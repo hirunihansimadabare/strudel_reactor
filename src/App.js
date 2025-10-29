@@ -118,14 +118,14 @@ export default function StrudelDemo(){
 
     //--The layout--
    return (
-        <div className="min-h-screen bg-gray-900 text-gray-100 p-4 sm:p-8 font-mono">
-            <h1 className="text-3x1 front-extrabold text-teal-400 mb-6 border-b border-teal-700 pb-2">Strudel Live-Code Preprocessor</h1>
-            <main className='space-y-6'>
+        <div>
+            <h2>Strudel Demo</h2>
+            <main>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="container-fluid">
                     <div className="row">
                         {/* Preprocessing editor */}
-                        <div className="lg:col-span-2 space-y-4 col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
+                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
                             <PreProcessingEditor text={editorText} onTextChange={setEditorText}
                             />
                         </div>
@@ -139,14 +139,8 @@ export default function StrudelDemo(){
                                 onProcAndPlay={handleProcAndPlay}
                             />
                         </div>
-                    </div>
-                    <div className="row">
-                        {/* Strudel Repl view */}
-                        <div className="col-md-8" style={{ maxHeight: '50vh', overflowY: 'auto' }}>
-                            <StrudelRepl />
-                        </div>
                         {/* Preprocessor controls */}
-                        <div className="col-md-4">
+                        <div className="col-md-4 offset-md-8">
                             <PreProcessingControls
                                 //Pass all the control values down
                                 controlsState={controlsState}
@@ -155,6 +149,13 @@ export default function StrudelDemo(){
                                 onControlUpdate={handleProcAndPlay}
                             />
                         </div>
+                    </div>
+                    <div className="row">
+                        {/* Strudel Repl view */}
+                        <div className="col-md-8" style={{ maxHeight: '60vh', overflowY: 'auto', width: '100%'}}>
+                            <StrudelRepl />
+                        </div>
+                        
                     </div>
                 </div>
                 <canvas id="roll"></canvas>
