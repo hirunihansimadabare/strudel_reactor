@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function strudelRepl() {
+export default function StrudelRepl() {
     return (
         <>
             <div id="editor"/>

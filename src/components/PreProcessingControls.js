@@ -27,6 +27,7 @@ export default function PreProcessingControls({controlsState, onControlChange, o
     ];
     return (
         <>
+            <hr />
             <div className="form-check">
                 <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" checked={controlsState.p1_Radio === 'ON'} onChange={() => handleRadioChange('ON')} />
                 <label className="form-check-label" htmlFor="flexRadioDefault1">p1: ON</label>
