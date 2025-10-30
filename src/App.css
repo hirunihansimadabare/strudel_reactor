@@ -72,28 +72,36 @@
 .audio-grid input,
 .audio-grid select { width: 100%; }
 
-/* Make the Strudel demo card short */
+/* the Strudel demo card */
 .strudel-card {
   display: flex;
   flex-direction: column;
-  height: 100vh;       
-  min-height: 220px;
-  overflow: hidden;    
+  height: 100vh; 
+  min-height: 200px;
+  overflow: hidden;
 }
 
 /* The inner area that scrolls */
-.strudel-repl-scroll {
-  flex: 1 1 auto;    
-  overflow: auto;     
-  min-height: 0;        
+.strudel-scroll-area {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Make Strudel editor visible and expand */
-#editor, .cm-editor, .cm-content {
-  width: 100% ;
-  height: 100% ;
-  min-height: 320px;
+/* To make sure the editor actually fits inside and doesn't expand */
+.editor-root {
+  width: 100%;
+  height: 100%;
+  min-height: 150px; 
   display: block;
+}
+
+.cm-editor, .cm-content {
+  width: 100%;
+  height: 100% ;
+  min-height: 150px ;
 }
 
 /* Canvas sits below everything */

@@ -36,7 +36,7 @@ export function ProcessText(controlsState) {
 //Main app component
 export default function StrudelDemo(){
     const hasRun = useRef(false);
-
+    const editorRootRef = useRef(null);
     //Holds text input of the editor
     const [editorText, setEditorText] = useState(stranger_tune);
 
@@ -94,7 +94,7 @@ export default function StrudelDemo(){
                     defaultOutput: webaudioOutput,
                     getTime: () => getAudioContext().currentTime,
                     transpiler,
-                    root: document.getElementById('editor'),
+                    root: editorRootRef.current,
                     drawTime,
                     onDraw: (haps, time) => drawPianoroll({ haps, time, ctx: drawContext, drawTime, fold: 0 }),
                     prebake: async () => {
@@ -137,7 +137,7 @@ return (
               {/* Audio controls */}
               <div className="card-box tight" style={{ flex: '1 0 auto' }}>
                 <h5 className="section-title">Audio Controls</h5>
-                <div className="audio-grid">
+                <div className="audio-grid-4x4">
                   <AudioControls
                     onPlay={handlePlay}
                     onStop={handleStop}
@@ -159,21 +159,23 @@ return (
             </div>
           </div>
   
-          {/*Strudel demo */}
-          <div className="row g-4 mt-1">
-            <div className="col-12">
-              <div className="card-box strudel-card">
-                <h5 className="section-title">Strudel demo</h5>
-                <div className="strudel-repl-scroll">
-                  <StrudelRepl />
-                </div>
-              </div>
+        {/*Strudel demo */}
+        <div className="row g-4 mt-1">
+        <div className="col-12">
+            <div className="card-box strudel-card">
+            <h5 className="section-title">Strudel demo</h5>
+            <div className="strudel-scroll-area" style={{ overflow: 'auto'}}>
+                <StrudelRepl />
             </div>
-          </div>
+            <div ref={editorRootRef} className="editor-root" />
+            </div>
         </div>
+        </div>
+
   
         {/* Pianoroll canvas */}
         <canvas id="roll"></canvas>
+        </div>
       </main>
     </div>
   );

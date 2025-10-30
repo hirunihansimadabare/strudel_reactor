@@ -8,7 +8,7 @@ export default function PreProcessingEditor({text, onTextChange}){
     return (
         <>
             <label htmlFor="proc" className="form-label">Text to preprocess:</label>
-            <textarea className="form-control" rows="15" id="proc" value={text} onChange={handleChange}
+            <textarea className="form-control" rows="19" id="proc" value={text} onChange={handleChange}
             ></textarea>
         </>
     )
