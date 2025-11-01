@@ -13,6 +13,7 @@ import PreProcessingEditor from './components/PreProcessingEditor';
 import AudioControls from './components/AudioControls';
 import PreProcessingControls from './components/PreProcessingControls';
 import StrudelRepl from './components/strudelRepl';
+import D3Graph from './components/D3Graph';
 
 let globalEditor = null;
 
@@ -166,8 +167,18 @@ return (
             </div>
           </div>
 
-          {/* Pianoroll canvas */}
-          <canvas id="roll"></canvas>
+        {/* Pianoroll canvas */}
+        <canvas id="roll"></canvas>
+
+        {/* D3 Graph */}
+        <div className="row g-4 mt-1">
+            <div className="col-12">
+                <div className="card-box">
+                    <h5 className="section-title">Strudel log D3 Graph</h5>
+                    <D3Graph />
+                </div>
+            </div>
+        </div>
         </div>
       </main>
     </div>

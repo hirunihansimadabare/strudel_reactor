@@ -52,8 +52,21 @@ export default function D3Graph({height = 220}) {
                     .attr("stroke", "blue")
                     .attr("stroke-width", 1.5)
                     .attr("d", line);
+
             }
 
         };
-    })
+        //Add the event listener when the component mounts
+        document.addEventListener("d3Data", handleD3Data);
+
+        //Clean up the event listener when the component unmounts
+        return () => {
+            document.removeEventListener("d3Data", handleD3Data);
+        };
+    }, []);
+
+    //the component's JSX structure
+    return (
+        <div ref={d3Container} style={{width: '100%', height: '300px' }}></div>
+    );
 }
