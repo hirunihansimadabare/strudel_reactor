@@ -76,6 +76,7 @@ stack(
   .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
   .postgain(.25),
 )
+.log(1)
 
 drums2: 
 stack(

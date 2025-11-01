@@ -100,7 +100,7 @@ export default function StrudelDemo() {
         },
         });
         Proc();
-        
+
     }, [Proc]);
 
 // --The layout--
@@ -167,7 +167,7 @@ return (
         {/* D3 Graph */}
         <div className="row g-4 mt-1">
             <div className="col-12">
-                <div className="card-box">
+                <div className="card-box" style={{minHeight: '350px'}}>
                     <h5 className="section-title">Strudel log D3 Graph</h5>
                     <D3Graph />
                 </div>
