@@ -31,8 +31,29 @@ export default function D3Graph({height = 220}) {
 
                 //Y scale
                 const y = d3.scaleLinear().domain([0, d3.max(data, d => d.value)]).range([height, 0]);
+
+                /* Axes */
+                //Append x-axis
+                svg.append("g").attr("transform",`translate(0, ${height})`).call(d3.axisBottom(x).ticks(5));
+
+                //Append y-axis
+                svg.append("g").call(d3.axisLeft(y).ticks(5));
+
+                //Line generator
+                const line = d3.line()
+                    .x((d, i) => x(i)) //x is the index
+                    .y(d => y(d.value)) //y is the value
+                    .curve(d3.curveMonotoneX); //To make the line smooth 
+
+                //Draw the line path
+                svg.append("path")
+                    .datum(data) //bind the data
+                    .attr("fill", "none")
+                    .attr("stroke", "blue")
+                    .attr("stroke-width", 1.5)
+                    .attr("d", line);
             }
 
-        }
+        };
     })
 }
