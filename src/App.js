@@ -16,6 +16,36 @@ import StrudelRepl from './components/strudelRepl';
 import D3Graph from './components/D3Graph';
 
 let globalEditor = null;
+//Helper key for localStorage
+const local_storage_key = 'strudelControlState';
+
+{/* JSON Handling */ }
+//function to save the current state
+export function saveControlsState(controlsState){
+    try{
+        const serializedState = JSON.stringify(controlsState);
+        localStorage.setItem(local_storage_key, serializedState);
+        console.log('Controls state saved to localStorage');
+    } catch (e){
+        console.error('Could not save the state to localStorage:', e);
+    }
+}
+
+//Function to load the control state 
+export function loadControlsState(controlsState){
+    try {
+        const serializedState = localStorage.getItem(local_storage_key);
+        if (serializedState === null) {
+            // Return initial default state if nothing is found
+            return { p1_Radio: 'ON', instrument: 'supersaw'};
+        }
+        console.log('Control state loaded');
+        return JSON.parse(serializedState);
+    } catch (e) {
+        console.error('Could not load state', e);
+        return {p1_Radio: 'ON', instrument: 'supersaw'};
+    }
+}
 
 //Preprocessing logic
 export function ProcessText(controlsState) {
@@ -35,11 +65,13 @@ export default function StrudelDemo() {
     //Holds text input of the editor
     const [editorText, setEditorText] = useState(stranger_tune);
     //Holds status of all the controls    
-    const [controlsState, setControlsState] = useState({ p1_Radio: 'ON', instrument: 'supersaw' });
+    const [controlsState, setControlsState] = useState(loadControlsState());
 
     //Replaces the old exported Proc and ProcAndPlay
     const Proc = useCallback(() => {
         if (!globalEditor) return;
+        //Save state immediately before processing
+        saveControlsState(controlsState);
         //Get the current replacement based on the control status
         const replacement = ProcessText(controlsState);
         let processedText = editorText

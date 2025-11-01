@@ -57,11 +57,11 @@ export default function D3Graph({}) {
 
         };
         //Add the event listener when the component mounts
-        document.addEventListener("D3Data", handleD3Data);
+        document.addEventListener("d3Data", handleD3Data);
 
         //Clean up the event listener when the component unmounts
         return () => {
-            document.removeEventListener("D3Data", handleD3Data);
+            document.removeEventListener("d3Data", handleD3Data);
         };
     }, []);
 
