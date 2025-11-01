@@ -17,10 +17,6 @@ import D3Graph from './components/D3Graph';
 
 let globalEditor = null;
 
-const handleD3Data = (event) => {
-  console.log(event.detail);
-};
-
 //Preprocessing logic
 export function ProcessText(controlsState) {
   let finalReplacement = {};
@@ -75,7 +71,6 @@ export default function StrudelDemo() {
     //--Initialization--
     useEffect(() => {
         if (hasRun.current || !editorRootRef.current) return;
-        document.addEventListener("d3Data", handleD3Data);
         console_monkey_patch();
         hasRun.current = true;
 
@@ -105,8 +100,7 @@ export default function StrudelDemo() {
         },
         });
         Proc();
-
-        return () => document.removeEventListener("d3Data", handleD3Data);
+        
     }, [Proc]);
 
 // --The layout--
