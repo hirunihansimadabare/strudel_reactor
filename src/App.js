@@ -125,6 +125,40 @@ export default function StrudelDemo() {
         setControlsState((previousState) => ({ ...previousState, [controlName]: value }));
     };
     
+    //--JSON export and import handlers--
+    //Handler for export button
+    const handleExportState = () =>{
+        exportControlsState(controlsState);
+    };
+
+    //Handler for import file input
+    const handleImportState = (event) => {
+        //Get the first file selected by the user
+        const file = event.target.files[0];
+        if (!file) return; //Exit if no file is selected
+
+        //Create an object to read the content of the file 
+        const reader= new FileReader();
+        reader.onload = (e) =>{
+            try {
+                //try to parse the file content into a javascript object
+                const loadedState = JSON.parse(e.target.result);
+                if (loadedState.p1_Radio !== undefined && loadedState.instrument !== undefined){
+                    //Update the React state with the successfully loaded data
+                    setControlsState(loadedState);
+                    //Apply new settings
+                    handleProcAndPlay();
+                    console.log('Controls state imported successfully!');
+                } else {
+                    console.error("Import failed! JSON format is invalid");
+                }
+            } catch (e){
+                console.error("Import failed! Could not parse JSON file", e);
+            }
+        };
+        //Start reading the file content as plain text string
+        reader.readAsText(file);
+    };
     //--Initialization--
     useEffect(() => {
         if (hasRun.current || !editorRootRef.current) return;
@@ -199,6 +233,8 @@ return (
                   controlsState={controlsState}
                   onControlChange={handleControlChange}
                   onControlUpdate={handleProcAndPlay}
+                  onExportState={handleExportState}
+                  onImportState={handleImportState}
                 />
               </div>
             </div>
