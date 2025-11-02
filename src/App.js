@@ -47,6 +47,31 @@ export function loadControlsState(controlsState){
     }
 }
 
+//Function to handle the export of the state as a JSON file
+export function exportControlsState(controlsState){
+    try {
+        //Create a data url scheme containing json data
+        const dataStr = "data:text/json;charset=utf-8, " + encodeURIComponent;
+        //Serialize javascript object to a formatted json string and 
+        const jsonString = JSON.stringify(controlsState, null, 2)
+        //Create an anchor element in the document
+        const downloadAnchorNode = document.createElement('a');
+        //Set the href attribute to the url
+        downloadAnchorNode.setAttribute("href", dataStr);
+        //set the download attribute 
+        downloadAnchorNode.setAttribute("download", "strudel_controls_preset.json");
+        //Append anchor node to the body 
+        document.body.appendChild(downloadAnchorNode);
+        //Trigger a click on the link, which initiates the download 
+        downloadAnchorNode.click();
+        //Remove the temporary anchor node
+        downloadAnchorNode.remove();
+        console.log('Controls state exported');
+        } catch (e) {
+            console.error('Could not export state', e);
+        }
+}
+
 //Preprocessing logic
 export function ProcessText(controlsState) {
   let finalReplacement = {};
