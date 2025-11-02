@@ -142,21 +142,20 @@ return (
       <main>
         <div className="container-fluid">
           <div className="row g-4 align-items-stretch">
-            
-            {/* Preprocessing editor */}
-            <div className="col-12 col-lg-7 d-flex">
-              <div className="card-box flex-fill" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <h5 className="section-title">Preprocessing editor</h5>
-                <div style={{ flexGrow: 1, overflowY: 'auto' }}>
-                  <PreProcessingEditor text={editorText} onTextChange={setEditorText} />
+            {/* D3 Graph */}
+            <div className="col-lg-5 d-flex">
+                <div className="col-12">
+                    <div className="card-box flex-fill" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        <h5 className="section-title">Strudel log D3 Graph</h5>
+                        <D3Graph />
+                    </div>
                 </div>
-              </div>
             </div>
 
             {/* Right side controls */}
-            <div className="col-12 col-lg-5 d-flex flex-column gap-4">
+            <div className="col-12 col-lg-3 d-flex">
               {/* Audio Controls */}
-              <div className="card-box tight" style={{ flex: '1 0 auto' }}>
+              <div className="card-box tight flex-fill audio-card">
                 <h5 className="section-title">Audio Controls</h5>
                 <div className="audio-grid-4x4">
                   <AudioControls
@@ -169,7 +168,7 @@ return (
               </div>
 
               {/* Instrument Swap */}
-              <div className="card-box" style={{ flex: '2 0 auto' }}>
+              <div className="col-12 col-lg-4 d-flex card-box flex-fill">
                 <h5 className="section-title">Radio and instrument swap</h5>
                 <PreProcessingControls
                   controlsState={controlsState}
@@ -181,9 +180,9 @@ return (
           </div>
 
           {/* Strudel Demo */}
-          <div className="row g-4 mt-1">
-            <div className="col-12">
-              <div className="card-box strudel-card">
+          <div className="row g-4 align-items-stretch">
+            <div className="col-12 col-lg-6 d-flex">
+              <div className="card-box strudel-card flex-fill">
                 <h5 className="section-title">Strudel demo</h5>
                 <div className="strudel-repl-scroll">
                   <StrudelRepl />
@@ -195,13 +194,13 @@ return (
 
         {/* Pianoroll canvas */}
         <canvas id="roll"></canvas>
-
-        {/* D3 Graph */}
-        <div className="row g-4 mt-1">
-            <div className="col-12">
-                <div className="card-box" style={{minHeight: '350px'}}>
-                    <h5 className="section-title">Strudel log D3 Graph</h5>
-                    <D3Graph />
+        
+        {/* Preprocessing editor */}
+        <div className="col-12 col-lg-6 d-flex">
+            <div className="card-box flex-fill" style={{ display: 'flex', flexDirection: 'column' }}>
+                <h5 className="section-title">Preprocessing editor</h5>
+                <div style={{ flexGrow: 1,height: '38vh', overflowY: 'auto' }}>
+                    <PreProcessingEditor text={editorText} onTextChange={setEditorText} />
                 </div>
             </div>
         </div>
