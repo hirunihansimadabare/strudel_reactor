@@ -68,7 +68,19 @@ export default function PreProcessingControls({controlsState, onControlChange, o
                 ))}
             </div>
             <hr />
-                    
+            {/* JSON Export/Import Section*/}
+            <h5 className="section-title text-start">Preset File Management</h5>
+            <div className="d-flex justify-content-between gap-2 mb-3">
+                
+                {/* Export Button */}
+                <button className="btn btn-secondary btn-sm w-50" onClick={onExportState}>Export Preset</button>
+                {/* Import Button */}
+                <button className="btn btn-secondary btn-sm w-50" onClick={handleImportClick}>Import Preset</button>
+            </div>
+            <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: 'none' }} accept=".json"/>
+
+            {/* Update Button*/}
+            <button className="btn btn-primary w-100 mt-2" onClick={onControlUpdate} >Apply Changes & Play</button>    
         </div>
     );
 } 
