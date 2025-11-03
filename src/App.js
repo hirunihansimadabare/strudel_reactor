@@ -211,8 +211,9 @@ return (
 
             {/* Right side controls */}
             
-            <div className="col-12 col-lg-3 d-flex audio-column">
-              {/* Audio Controls */}
+            <div className="col-12 col-lg-5 d-flex audio-column">
+              
+            {/* Audio Controls */}
               <div className="card-box tight flex-fill">
                 <h5 className="section-title">Audio Controls</h5>
                 <div className="audio-grid-2x2 ">
@@ -225,7 +226,7 @@ return (
                 </div>
               </div>
 
-              {/* Instrument Swap */}
+            {/* Instrument Swap */}
               <div className="card-box flex-fill">
                 <PreProcessingControls
                   controlsState={controlsState}
@@ -238,28 +239,28 @@ return (
             </div>
         </div>
 
-        {/* Strudel Demo */}
-          <div className="row align-items-stretch">
-            <div className="col-12 col-lg-6 d-flex">
-              <div className="card-box strudel-card flex-fill">
-                <h5 className="section-title">Strudel demo</h5>
-                <div className="strudel-repl-scroll">
-                  <StrudelRepl />
-                </div>
+        {/* Strudel demo*/}
+        <div className="row align-items-stretch">
+            <div className="col-12 col-lg-6 d-flex order-lg-1">
+                <div className="card-box strudel-card flex-fill">
+                    <h5 className="section-title">Strudel demo</h5>
+                    <div className="strudel-repl-scroll">
+                        <StrudelRepl />
+                    </div>
                 <div ref={editorRootRef} className="editor-root" />
-              </div>
             </div>
-          </div>
+        </div>
 
         {/* Preprocessing editor */}
-        <div className="col-12 col-lg-6 d-flex">
-            <div className="card-box flex-fill" style={{ display: 'flex', flexDirection: 'column', height:'55vh', minHeight:'260px'  }}>
+        <div className="col-12 col-lg-6 d-flex order-lg-2">
+            <div className="card-box flex-fill" style={{ display: "flex", flexDirection: "column", height: "55vh", minHeight: "260px",}}>
                 <h5 className="section-title">Preprocessing editor</h5>
-                <div style={{ flexGrow:1, overflow:'auto', minHeight:0 }}>
+                <div style={{ flexGrow: 1, overflow: "auto", minHeight: 0 }}>
                     <PreProcessingEditor text={editorText} onTextChange={setEditorText} />
                 </div>
             </div>
         </div>
+    </div>
 
         {/* Pianoroll canvas */}
         <canvas id="roll"></canvas>

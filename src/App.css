@@ -27,21 +27,60 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 }
 
 /* cards */
-.card-box{
-  background: var(--card);
-  border: 1px solid var(--stroke);
-  border-radius: var(--radius);
+.card-box {
+  background: rgba(20, 20, 30, 0.85);
+  border: 2px solid rgba(45, 212, 191, 0.4);
+  border-radius: 20px;
   padding: 18px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(6px);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+/* nicer spacing for stacked control cards */
+.controls-column > .card-box {
+  margin-bottom: 12px;
+}
+
+/* tighten the cards a bit for the right column */
+.card-box .form-check-input {
+  cursor: pointer;
+}
+.card-box .form-check-label {
+  margin-left: 6px;
+  cursor: pointer;
+}
 .card-box.tight{ padding: 14px; }
 
-/* subtle neon ring on hover */
-.card-box:hover{
-  border-color: rgba(45,212,191,0.35);
-  box-shadow: 0 0 0 2px rgba(45,212,191,0.15), var(--shadow);
+/* PreProcessingControls text colors */
+.card-box,
+.card-box label,
+.card-box h5,
+.card-box button,
+.card-box input,
+.card-box select {
+  color: #e8eef8;
+}
+
+/* to make inputs readable in dark mode */
+.card-box input[type="radio"],
+.card-box input[type="text"],
+.card-box input[type="file"] {
+  accent-color: #2dd4bf;
+}
+
+.card-box h5.section-title {
+  text-shadow: 0 0 6px rgba(45, 212, 191, 0.5);
+}
+
+/* neon ring on hover */
+.card-box:hover {
+  border-color: #2dd4bf; 
+  box-shadow:
+    0 0 10px rgba(45, 212, 191, 0.8),
+    0 0 30px rgba(45, 212, 191, 0.4),
+    0 0 60px rgba(45, 212, 191, 0.2);
+  transform: translateY(-3px);
+  background: rgba(30, 30, 45, 0.9);
 }
 
 /* stack equal-width cards vertically with gap */
@@ -57,7 +96,11 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 .audio-grid-2x2 > * { width: 100%; }
 
 /* space between the Audio card and the right column */
-.audio-column { margin-right: 24px; }
+.audio-column {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
 
 /* Strudel demo card*/
 .strudel-card{
@@ -84,7 +127,35 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 }
 
 /* d3 graph */
-.d3-card{ height: 42vh; min-height: 320px; }
+.d3-card {
+  height: 74vh;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The inner plot area to be filled by the svg */
+.d3-plot {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+}
+
+/* Make sure anything d3 appends fills its box */
+.d3-plot > svg,
+.d3-plot > div,
+.d3-container,
+.d3-container > svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.row.align-items-stretch > .col-lg-6,
+.row.align-items-stretch > .col-lg-3 {
+  display: flex;
+  align-items: stretch;
+}
 
 /*  utility */
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }

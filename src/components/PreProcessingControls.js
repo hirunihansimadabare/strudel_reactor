@@ -35,54 +35,44 @@ export default function PreProcessingControls({controlsState, onControlChange, o
     return (
         <div className="d-flex flex-column gap-3">
             
-            {/* Radio Controls */}
-            <div className="card-box col-12 col-lg-3 d-flex mute-container">
-            <h5 className="section-title">Mute/Unmute</h5>
-                <div className="d-flex justify-content-around d-flex justify-content-around">
-                    <input className="form-check-input" type="radio" name="p1Radio" id="radioOn" 
-                        checked={controlsState.p1_Radio === 'ON'} 
-                        onChange={() => handleRadioChange('ON')} />
-                    <label className="form-check-label" htmlFor="radioOn">ON</label>
-                </div>
-
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="p1Radio" id="radioHUSH" 
-                        checked={controlsState.p1_Radio === 'HUSH'} 
-                        onChange={() => handleRadioChange('HUSH')} />
-                    <label className="form-check-label" htmlFor="radioHUSH">HUSH</label>
-                </div>
+        {/* Radio Controls */}
+        <div className="card-box">
+        <h5 className="section-title mb-3">Mute/Unmute</h5>
+        <fieldset className="d-flex align-items-center gap-4 m-0">
+            <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="p1Radio" id="radioOn" checked={controlsState.p1_Radio === "ON"} onChange={() => handleRadioChange("ON")}/>
+                <label className="form-check-label" htmlFor="radioOn">ON</label>
             </div>
-
-            <hr className="card-box"/>
-            <h5 className="section-title">Instrument swap</h5>
-            <div className="d-flex flex-wrap justify-content-between gap-2 mb-3">
-                {instrumentOptions.map((option) => (
-                    <div className="form-check form-check-inline" key={option.value}>
-                        <input className="form-check-input" type="radio" name="instrumentSelect" id={`inst_${option.value}`} checked={controlsState.instrument === option.value}
-                            onChange={() => handleInstrumentChange(option.value)}
-                        />
-                        <label className="form-check-label" htmlFor={`inst_${option.value}`}>
-                            {option.label}
-                        </label>
-                    </div>
-                ))}
+            <div className="form-check form-check-inline">
+                <input className="form-check-input" type="radio" name="p1Radio" id="radioHUSH" checked={controlsState.p1_Radio === "HUSH"} onChange={() => handleRadioChange("HUSH")}/>
+            <label className="form-check-label" htmlFor="radioHUSH">HUSH</label>
             </div>
-            <hr />
-            {/* JSON Export/Import Section*/}
-            <div className="card-box">
-            <h5 className="section-title text-start">Preset File Management</h5>
-            <div className="d-flex justify-content-between gap-2 mb-3">
-                
-                {/* Export Button */}
-                <button className="btn btn-info btn-sm w-50" onClick={onExportState}>Export Preset</button>
-                {/* Import Button */}
-                <button className="btn btn-info btn-sm w-50" onClick={handleImportClick}>Import Preset</button>
-            </div>
-            <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: 'none' }} accept=".json"/>
-
-            {/* Update Button*/}
-            <button className="btn btn-primary w-100 mt-auto" onClick={onControlUpdate} >Apply Changes & Play</button>    
-            </div>
+        </fieldset>
         </div>
+
+        {/* Instrument swap */}
+        <div className="card-box">
+        <h5 className="section-title mb-3">Instrument swap</h5>
+        <div className="d-flex flex-wrap gap-3">{instrumentOptions.map((opt) => (
+            <div className="form-check" key={opt.value}>
+                <input className="form-check-input" type="radio" name="instrumentSelect" id={`inst_${opt.value}`} checked={controlsState.instrument === opt.value} onChange={() => handleInstrumentChange(opt.value)}/>
+                <label className="form-check-label" htmlFor={`inst_${opt.value}`}>{opt.label}</label>
+            </div>
+        ))}
+        </div>
+        </div>
+
+        {/* JSON Export/Import Section*/}
+        <div className="card-box">
+            <h5 className="section-title text-start mb-3">Preset File Management</h5>
+            <div className="d-flex gap-2 mb-3">
+                <button className="btn btn-info flex-fill" onClick={onExportState}>Export Preset</button>
+                <button className="btn btn-info flex-fill" onClick={handleImportClick}>Import Preset</button>
+                <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: "none" }} accept=".json"/>
+            </div>
+
+            <button className="btn btn-primary w-100" onClick={onControlUpdate}>Apply Changes & Play</button>
+        </div>
+    </div>
     );
 } 
