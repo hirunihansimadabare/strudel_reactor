@@ -212,7 +212,8 @@ return (
             </div>
 
             {/* Right side controls */}
-            <div className="col-12 col-lg-3 d-flex">
+            
+            <div className="col-6 col-lg-55 d-flex">
               {/* Audio Controls */}
               <div className="card-box tight flex-fill audio-card">
                 <h5 className="section-title">Audio Controls</h5>
@@ -228,7 +229,6 @@ return (
 
               {/* Instrument Swap */}
               <div className="col-12 col-lg-4 d-flex card-box flex-fill">
-                <h5 className="section-title">Radio and instrument swap</h5>
                 <PreProcessingControls
                   controlsState={controlsState}
                   onControlChange={handleControlChange}

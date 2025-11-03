@@ -111,3 +111,13 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.audio .card-box,
+.mute .card-box {
+  min-height: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+

@@ -33,12 +33,12 @@ export default function PreProcessingControls({controlsState, onControlChange, o
         {label: 'Bass', value: 'sine'},
     ];
     return (
-        <div className="preprocessing-controls-container">
+        <div className="d-flex flex-column gap-3">
             
             {/* Radio Controls */}
-            <h5 className="section-title text-start">Mute/Unmute</h5>
-            <div className="d-flex justify-content-around">
-                <div className="form-check form-check-inline">
+            <div className="card-box col-12 col-lg-3 d-flex mute-container">
+            <h5 className="section-title">Mute/Unmute</h5>
+                <div className="d-flex justify-content-around d-flex justify-content-around">
                     <input className="form-check-input" type="radio" name="p1Radio" id="radioOn" 
                         checked={controlsState.p1_Radio === 'ON'} 
                         onChange={() => handleRadioChange('ON')} />
@@ -53,9 +53,9 @@ export default function PreProcessingControls({controlsState, onControlChange, o
                 </div>
             </div>
 
-            <hr />
-            <h5 className="section-title" text-start>Instrument swap</h5>
-            <div className="d-flex flex-wrap justify-content-between mb-3">
+            <hr className="card-box"/>
+            <h5 className="section-title">Instrument swap</h5>
+            <div className="d-flex flex-wrap justify-content-between gap-2 mb-3">
                 {instrumentOptions.map((option) => (
                     <div className="form-check form-check-inline" key={option.value}>
                         <input className="form-check-input" type="radio" name="instrumentSelect" id={`inst_${option.value}`} checked={controlsState.instrument === option.value}
@@ -69,18 +69,20 @@ export default function PreProcessingControls({controlsState, onControlChange, o
             </div>
             <hr />
             {/* JSON Export/Import Section*/}
+            <div className="card-box">
             <h5 className="section-title text-start">Preset File Management</h5>
             <div className="d-flex justify-content-between gap-2 mb-3">
                 
                 {/* Export Button */}
-                <button className="btn btn-secondary btn-sm w-50" onClick={onExportState}>Export Preset</button>
+                <button className="btn btn-info btn-sm w-50" onClick={onExportState}>Export Preset</button>
                 {/* Import Button */}
-                <button className="btn btn-secondary btn-sm w-50" onClick={handleImportClick}>Import Preset</button>
+                <button className="btn btn-info btn-sm w-50" onClick={handleImportClick}>Import Preset</button>
             </div>
             <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: 'none' }} accept=".json"/>
 
             {/* Update Button*/}
-            <button className="btn btn-primary w-100 mt-2" onClick={onControlUpdate} >Apply Changes & Play</button>    
+            <button className="btn btn-primary w-100 mt-auto" onClick={onControlUpdate} >Apply Changes & Play</button>    
+            </div>
         </div>
     );
 } 
