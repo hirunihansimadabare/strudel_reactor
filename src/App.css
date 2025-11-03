@@ -1,123 +1,98 @@
-.App {
-  text-align: center;
+
+:root{
+  --bg: #0c0f14;
+  --card: rgba(20,24,31,0.75);
+  --stroke: rgba(255,255,255,0.08);
+  --text: #e8eef8;
+  --muted: #9fb0c7;
+  --accent: #2dd4bf;
+  --accent-2: #a78bfa;
+  --radius: 24px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+html, body, #root { height: 100%; }
+body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--bg) 55%); color: var(--text); }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* General */
+.container-fluid { padding: 24px; }
+.row { margin-bottom: 24px; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Rounded, bordered containers like your sketch */
-.card-box {
-  background: #fff;
-  border: 2px solid #d8d8d8;
-  border-radius: 28px; 
-  padding: 20px;
-}
-
-/* Slightly tighter padding for the small Audio box */
-.card-box.tight {
-  padding: 14px;
-}
-
-/* Section titles centered and subtle */
 .section-title {
   text-align: center;
   margin: 0 0 12px 0;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: var(--text);
 }
 
-/* 2x2 grid for audio control buttons */
-.audio-grid {
+/* cards */
+.card-box{
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+
+.card-box.tight{ padding: 14px; }
+
+/* subtle neon ring on hover */
+.card-box:hover{
+  border-color: rgba(45,212,191,0.35);
+  box-shadow: 0 0 0 2px rgba(45,212,191,0.15), var(--shadow);
+}
+
+/* stack equal-width cards vertically with gap */
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* Audio grid */
+.audio-grid-2x2{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: repeat(4, minmax(36px, auto));
+  grid-template-columns: repeat(2, minmax(120px,1fr));
+  grid-auto-rows: minmax(40px, auto);
   gap: 12px;
-  align-items: center;
 }
+.audio-grid-2x2 > * { width: 100%; }
 
-/* Make sure that controls fill grid cells */
-.audio-grid > * { display: contents; }
-.audio-grid button { width: 100%; }
+/* space between the Audio card and the right column */
+.audio-column { margin-right: 24px; }
 
-/* the Strudel demo card */
-.strudel-card {
+/* Strudel demo card*/
+.strudel-card{
   display: flex;
   flex-direction: column;
-  height: 100vh; 
-  min-height: 220px;
+  height: 55vh; 
+  min-height: 260px;
   overflow: hidden;
 }
-
-/* The inner area that scrolls */
-.strudel-scroll-area {
+.strudel-repl-scroll{
   flex: 1 1 auto;
-  overflow-y: auto;
+  overflow: auto;
   min-height: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 6px;
 }
 
-/* To make sure the editor actually fits inside and doesn't expand */
-.editor-root {
+/* ensure the CodeMirror editor sizes properly */
+.editor-root, .cm-editor, .cm-content{
   width: 100%;
   height: 100%;
-  min-height: 160px; 
-  display: block;
-}
-
-.cm-editor, .cm-content {
-  width: 100%;
-  height: 100% ;
-  min-height: 150px ;
-}
-
-/* Canvas sits below everything */
-#roll { position: relative; z-index: 0; }
-
-@media (max-width: 991.98px) {
-  .audio-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.audio .card-box,
-.mute .card-box {
   min-height: 200px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
+/* d3 graph */
+.d3-card{ height: 42vh; min-height: 320px; }
+
+/*  utility */
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+.muted { color: var(--muted); }
+
+#roll { width: 100%; display: block; }
+
+@media (max-width: 991.98px){
+  .audio-column { margin-right: 0; }
+  .audio-grid-2x2 { grid-template-columns: repeat(2,1fr); }
+}
