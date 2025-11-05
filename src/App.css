@@ -34,6 +34,8 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
   padding: 18px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
 /* nicer spacing for stacked control cards */
@@ -92,14 +94,21 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
   grid-template-columns: repeat(2, minmax(120px,1fr));
   grid-auto-rows: minmax(40px, auto);
   gap: 12px;
+  align-items: stretch;
+  justify-items: stretch;
 }
-.audio-grid-2x2 > * { width: 100%; }
+.audio-grid-2x2 > * {
+  width: 100%;
+  display: block ;
+}
 
 /* space between the Audio card and the right column */
 .audio-column {
   display: flex;
   flex-direction: row;
   gap: 3rem;
+  position: relative;
+  z-index: 10;
 }
 
 /* Strudel demo card*/
@@ -117,6 +126,34 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
   border: 1px dashed rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 6px;
+}
+
+.btn {
+  background: rgba(45, 212, 191, 0.08);
+  border: 2px solid rgba(45, 212, 191, 0.8);
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 10px 16px;
+  box-shadow: 
+    0 0 6px rgba(4, 255, 222, 0.4),
+    inset 0 0 4px rgba(11, 248, 217, 0.2);
+  transition: 
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgba(45, 212, 191, 0.2);
+  border-color: #2dd4bf;
+  box-shadow: 
+    0 0 12px #2dd4bf,
+    0 0 30px rgba(45, 212, 191, 0.6),
+    inset 0 0 8px rgba(45, 212, 191, 0.4);
+  transform: translateY(-1.5px);
 }
 
 /* ensure the CodeMirror editor sizes properly */

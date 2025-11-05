@@ -70,8 +70,6 @@ export default function PreProcessingControls({controlsState, onControlChange, o
                 <button className="btn btn-info flex-fill" onClick={handleImportClick}>Import Preset</button>
                 <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: "none" }} accept=".json"/>
             </div>
-
-            <button className="btn btn-primary w-100" onClick={onControlUpdate}>Apply Changes & Play</button>
         </div>
     </div>
     );

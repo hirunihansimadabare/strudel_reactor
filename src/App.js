@@ -205,7 +205,9 @@ return (
             <div className="col-12 col-lg-6 d-flex">
                     <div className="card-box d3-card flex-fill">
                         <h5 className="section-title">Strudel log D3 Graph</h5>
+                        <div className="d3-plot">
                         <D3Graph />
+                        </div>
                     </div>
             </div>
 
@@ -216,14 +218,12 @@ return (
             {/* Audio Controls */}
               <div className="card-box tight flex-fill">
                 <h5 className="section-title">Audio Controls</h5>
-                <div className="audio-grid-2x2 ">
                   <AudioControls
                     onPlay={handlePlay}
                     onStop={handleStop}
                     onPreProcess={Proc}
                     onProcAndPlay={handleProcAndPlay}
                   />
-                </div>
               </div>
 
             {/* Instrument Swap */}
