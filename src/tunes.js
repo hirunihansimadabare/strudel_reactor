@@ -1,5 +1,5 @@
 //--Default song--
-export const default_tune = `setcps(140/60/4)
+export const default_tune = `setcps((140/60/4) * <speed_mul>)
 
 samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
@@ -104,7 +104,7 @@ stack(
 // @version 1.2`;
 
 //--ALT 1 – Punchy--
-export const alt1_tune = `setcps(150/60/4)
+export const alt1_tune = `setcps((150/60/4)* <speed_mul>)
 
 samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
@@ -137,7 +137,7 @@ stack(
 .log(1)`;
 
 //--ALT 2 – Deep bass--
-export const alt2_tune = `setcps(90/60/4)
+export const alt2_tune = `setcps((90/60/4)* <speed_mul>)
 
 samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
@@ -168,7 +168,7 @@ stack(
 .log(1)`;
 
 //-- ALT 3 – Bright bass--
-export const alt3_tune = `setcps(130/60/4)
+export const alt3_tune = `setcps((130/60/4)* <speed_mul>)
 
 samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')

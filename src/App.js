@@ -50,20 +50,21 @@ export function loadControlsState(controlsState){
         const serializedState = localStorage.getItem(local_storage_key);
         if (serializedState === null) {
             // Return initial default state if nothing is found
-            return { p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8, song: 'default'};
+            return { p1_Radio: 'ON', instrument: 'supersaw', volume: 0.5, song: 'default', speed: 1.0};
         }
         console.log('Control state loaded');
         const saved=  JSON.parse(serializedState);
         return {
             p1_Radio: saved.p1_Radio ?? "ON", 
             instrument: saved.instrument ?? "supersaw",
-            volume: saved.volume ?? 0.8,
+            volume: saved.volume ?? 0.5,
             song: saved.song ?? 'default',
+            speed: saved.speed ?? 1.0,
             ...saved
         }
     } catch (e) {
         console.error('Could not load state', e);
-        return {p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8, song: 'default'};
+        return {p1_Radio: 'ON', instrument: 'supersaw', volume: 0.5, song: 'default', speed: 1.0};
     }
 }
 
@@ -101,8 +102,11 @@ export function ProcessText(controlsState) {
     //Instrument logic
     finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
 
-    const vol = typeof controlsState.volume === "number" ? controlsState.volume: 0.8;
+    const vol = typeof controlsState.volume === "number" ? controlsState.volume: 0.5;
     finalReplacement['<master_gain>'] = vol.toFixed(2);
+
+    const speed = typeof controlsState.speed === "number"? controlsState.speed: 1.0;
+    finalReplacement['<speed_mul>'] = speed.toFixed(2);
     return finalReplacement;
 }
 
@@ -127,7 +131,9 @@ export default function StrudelDemo() {
         .replaceAll('<p1_Radio>', replacement['<p1_Radio>'])
         //Apply new instrument tag replacement
         .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
-        .replaceAll('<master_gain>', replacement['<master_gain>']);
+        .replaceAll('<master_gain>', replacement['<master_gain>'])
+        .replaceAll('<speed_mul>', replacement['<speed_mul>']);
+        
 
         //Send processed code to Strudel Repl
         globalEditor.setCode(processedText);
@@ -255,6 +261,14 @@ return (
                     setVolume={(vol) =>
                         setControlsState((prev) => {
                             const updated = {...prev, volume: vol};
+                            saveControlsState(updated);
+                            return updated;
+                        })
+                    }
+                    speed={controlsState.speed}
+                    setSpeed={(s) =>
+                        setControlsState((prev) => {
+                            const updated = { ...prev, speed: s };
                             saveControlsState(updated);
                             return updated;
                         })
