@@ -12,6 +12,12 @@ export default function PreProcessingControls({controlsState, onControlChange, o
         onControlUpdate();
     };
 
+    //handle song selection change
+    const handleSongChange = (value) => {
+        onControlChange('song', value);
+        // onControlUpdate();
+    };
+
     //Ref to trigger the file input click when import button is pressed
     const fileInputRef = useRef(null);
 
@@ -19,19 +25,14 @@ export default function PreProcessingControls({controlsState, onControlChange, o
     const handleImportClick = ()=>{
         fileInputRef.current.click();
     };
-    //Handles new instrument change
-    const handleInstrumentChange = (value) => {
-        onControlChange('instrument', value);       
-        onControlUpdate();
-    };
-
-    //Mapping for the four options of instrument
-    const instrumentOptions = [
-        {label: 'Default', value: 'supersaw'},
-        {label: 'Piano', value: 'piano'},
-        {label: 'Strings', value: 'strings'},
-        {label: 'Bass', value: 'sine'},
+    
+    const songOptions = [
+        {label: 'Default Groove', value: 'default'},
+        {label: 'Alt 1 - Punchy', value: 'alt1'},
+        {label: 'Alt 2 - Deep Bass', value: 'alt2'},
+        {label: 'Alt 3 - Bright Bass', value: 'alt3'}
     ];
+
     return (
         <div className="d-flex flex-column gap-3">
             
@@ -50,17 +51,27 @@ export default function PreProcessingControls({controlsState, onControlChange, o
         </fieldset>
         </div>
 
-        {/* Instrument swap */}
+        {/* Song selector */}
         <div className="card-box">
-        <h5 className="section-title mb-3">Instrument swap</h5>
-        <div className="d-flex flex-wrap gap-3">{instrumentOptions.map((opt) => (
+        <h5 className="section-title mb-3">Song Selector</h5>
+        <div className="d-flex flex-column gap-2">
+          {songOptions.map((opt) => (
             <div className="form-check" key={opt.value}>
-                <input className="form-check-input" type="radio" name="instrumentSelect" id={`inst_${opt.value}`} checked={controlsState.instrument === opt.value} onChange={() => handleInstrumentChange(opt.value)}/>
-                <label className="form-check-label" htmlFor={`inst_${opt.value}`}>{opt.label}</label>
+              <input
+                className="form-check-input"
+                type="radio"
+                id={`song-${opt.value}`}
+                name="songSelect"
+                checked={controlsState.song === opt.value}
+                onChange={() => handleSongChange(opt.value)}
+              />
+              <label className="form-check-label" htmlFor={`song-${opt.value}`}>
+                {opt.label}
+              </label>
             </div>
-        ))}
+          ))}
         </div>
-        </div>
+      </div>
 
         {/* JSON Export/Import Section*/}
         <div className="card-box">

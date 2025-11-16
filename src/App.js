@@ -1,12 +1,12 @@
 import './App.css';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
-import { control, evalScope } from '@strudel/core';
+import { control, controls, evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
 import { initAudioOnFirstClick, getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
 import { transpiler } from '@strudel/transpiler';
-import { stranger_tune } from './tunes';
+import { default_tune, alt1_tune, alt2_tune, alt3_tune } from './tunes';
 import console_monkey_patch, { getD3Data } from './console-monkey-patch';
 
 import PreProcessingEditor from './components/PreProcessingEditor';
@@ -18,6 +18,19 @@ import D3Graph from './components/D3Graph';
 let globalEditor = null;
 //Helper key for localStorage
 const local_storage_key = 'strudelControlState';
+
+function getSongCode(song) {
+    switch (song) {
+      case 'alt1':
+        return alt1_tune;
+      case 'alt2':
+        return alt2_tune;
+      case 'alt3':
+        return alt3_tune;
+      default:
+        return default_tune;
+    }
+  }
 
 {/* JSON Handling */ }
 //function to save the current state
@@ -37,7 +50,7 @@ export function loadControlsState(controlsState){
         const serializedState = localStorage.getItem(local_storage_key);
         if (serializedState === null) {
             // Return initial default state if nothing is found
-            return { p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8};
+            return { p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8, song: 'default'};
         }
         console.log('Control state loaded');
         const saved=  JSON.parse(serializedState);
@@ -45,11 +58,12 @@ export function loadControlsState(controlsState){
             p1_Radio: saved.p1_Radio ?? "ON", 
             instrument: saved.instrument ?? "supersaw",
             volume: saved.volume ?? 0.8,
+            song: saved.song ?? 'default',
             ...saved
         }
     } catch (e) {
         console.error('Could not load state', e);
-        return {p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8};
+        return {p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8, song: 'default'};
     }
 }
 
@@ -80,17 +94,14 @@ export function exportControlsState(controlsState){
 
 //Preprocessing logic
 export function ProcessText(controlsState) {
-  let finalReplacement = {};
-  //P1 radio logic
-  finalReplacement['<p1_Radio>'] = controlsState.p1_Radio === 'HUSH' ? "_" : "";
+    let finalReplacement = {};
+    //P1 radio logic
+    finalReplacement['<p1_Radio>'] = controlsState.p1_Radio === 'HUSH' ? "_" : "";
 
-  //Instrument logic
-  finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
+    //Instrument logic
+    finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
 
-  const vol = typeof controlsState.volume === "number" ? controlsState.volume: 0.8;
-  finalReplacement["<volume>"] = vol.toFixed(2);
-
-  return finalReplacement;
+    return finalReplacement;
 }
 
 //Main app component
@@ -98,7 +109,7 @@ export default function StrudelDemo() {
     const hasRun = useRef(false);
     const editorRootRef = useRef(null);
     //Holds text input of the editor
-    const [editorText, setEditorText] = useState(stranger_tune);
+    const [editorText, setEditorText] = useState(default_tune);
     //Holds status of all the controls    
     const [controlsState, setControlsState] = useState(loadControlsState());
 
@@ -113,8 +124,7 @@ export default function StrudelDemo() {
         //Apply the replacement to the song
         .replaceAll('<p1_Radio>', replacement['<p1_Radio>'])
         //Apply new instrument tag replacement
-        .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
-        .replaceAll('<volume>', replacement['<volume>']);
+        // .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
 
         //Send processed code to Strudel Repl
         globalEditor.setCode(processedText);
@@ -205,7 +215,11 @@ export default function StrudelDemo() {
 
     }, [Proc]);
 
-// --The layout--
+    useEffect(() => {
+        setEditorText(getSongCode(controlsState.song));
+    }, [controlsState.song]);
+
+    // --The layout--
 return (
     <div>
       <h2 className="visually-hidden">Strudel Demo</h2>
