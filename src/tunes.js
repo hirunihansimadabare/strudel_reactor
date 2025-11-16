@@ -5,6 +5,9 @@ samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
 samples('https://raw.githubusercontent.com/Mittans/tidal-drum-machines/main/machines/tidal-drum-machines.json')
 
+// React will replace <master_gain> with a number like 1.00 or 0.35
+const masterGain = <master_gain>;
+
 const gain_patterns = [
   "2",
   "{0.75 2.5}*4",
@@ -47,6 +50,7 @@ note(pick(basslines, bass))
   .lpf(700)
   .room(0.4)
   .postgain(pick(gain_patterns, pattern))
+  .gain(masterGain)
 
 main_arp: 
 note(pick(arpeggiator1, "<0 1 2 3>/2"))
@@ -56,6 +60,7 @@ note(pick(arpeggiator1, "<0 1 2 3>/2"))
   .room(0.6)
   .lpenv(3.3)
   .postgain(pick(gain_patterns, pattern))
+  .gain(masterGain)
 
 drums:
 stack(
@@ -74,6 +79,7 @@ stack(
     .bank("[KorgDDM110, OberheimDmx]").speed(1.2)
     .postgain(.25),
 )
+.gain(masterGain)
 .log(1)
 
 drums2: 
@@ -92,6 +98,7 @@ stack(
     .speed(0.5)
     .rarely(jux(rev)),
 )
+.gain(masterGain)
 
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY"
 // @version 1.2`;
@@ -103,11 +110,14 @@ samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
 samples('https://raw.githubusercontent.com/Mittans/tidal-drum-machines/main/machines/tidal-drum-machines.json')
 
+const masterGain = <master_gain>;
+
 bassline:
 note("[c2 g2 c3 g2]/4")
   .sound("supersaw")
   .room(0.4)
   .postgain(2)
+  .gain(masterGain)
 
 lead:
 note("[c4 e4 g4 e4]/8 [d4 f4 a4 f4]/8")
@@ -115,13 +125,16 @@ note("[c4 e4 g4 e4]/8 [d4 f4 a4 f4]/8")
   .room(0.7)
   .lpf(1200)
   .postgain(1.5)
+  .gain(masterGain)
 
 drums:
 stack(
   s("bd*4").bank("RolandTR808").postgain(2.8),
   s("hh").struct("x*8").bank("RolandTR808").postgain(0.7),
   s("cp").struct("~ x ~ x").bank("RolandTR808").postgain(0.9)
-)`;
+)
+.gain(masterGain)
+.log(1)`;
 
 //--ALT 2 – Deep bass--
 export const alt2_tune = `setcps(90/60/4)
@@ -129,24 +142,30 @@ export const alt2_tune = `setcps(90/60/4)
 samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
 
+const masterGain = <master_gain>;
+
 pad:
 note("[c3 g3 bb3 d4]/2 [f3 c4 eb4 g4]/2")
   .sound("supersaw")
   .room(0.9)
   .lpf(900)
   .postgain(1.8)
+  .gain(masterGain)
 
 bassline:
 note("[c2 ~ g2 ~]/2 [bb1 ~ f2 ~]/2")
   .sound("supersaw")
   .room(0.6)
   .postgain(1.4)
+  .gain(masterGain)
 
 drums:
 stack(
   s("bd*2").bank("RolandTR808").postgain(1.6),
   s("hh").struct("~ x ~ x").bank("RolandTR808").postgain(0.4)
-)`;
+)
+.gain(masterGain)
+.log(1)`;
 
 //-- ALT 3 – Bright bass--
 export const alt3_tune = `setcps(130/60/4)
@@ -155,18 +174,22 @@ samples('github:algorave-dave/samples')
 samples('https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/master/strudel.json')
 samples('https://raw.githubusercontent.com/Mittans/tidal-drum-machines/main/machines/tidal-drum-machines.json')
 
+const masterGain = <master_gain>;
+
 lead:
 note("[c4 e4 g4 bb4]*2 [d4 f4 a4 c5]*2")
   .sound("supersaw")
   .room(0.7)
   .lpf(1500)
   .postgain(1.7)
+  .gain(masterGain)
 
 arp:
 note("[c5 g4 e5 g4]/4 [bb4 f4 d5 f4]/4")
   .sound("supersaw")
   .room(0.5)
   .postgain(1.2)
+  .gain(masterGain)
 
 drums:
 stack(
@@ -176,6 +199,8 @@ stack(
   s("[psr:[2|5|7|9|12]*8]?0.2")
     .postgain(0.5)
     .hpf(1200)
-)`;
+)
+.gain(masterGain)
+.log(1)`;
 
 export const stranger_tune = default_tune;

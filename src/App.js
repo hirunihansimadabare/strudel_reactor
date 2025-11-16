@@ -1,7 +1,7 @@
 import './App.css';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
-import { control, controls, evalScope } from '@strudel/core';
+import { evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
 import { initAudioOnFirstClick, getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
@@ -101,6 +101,8 @@ export function ProcessText(controlsState) {
     //Instrument logic
     finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
 
+    const vol = typeof controlsState.volume === "number" ? controlsState.volume: 0.8;
+    finalReplacement['<master_gain>'] = vol.toFixed(2);
     return finalReplacement;
 }
 
@@ -124,7 +126,8 @@ export default function StrudelDemo() {
         //Apply the replacement to the song
         .replaceAll('<p1_Radio>', replacement['<p1_Radio>'])
         //Apply new instrument tag replacement
-        // .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
+        .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
+        .replaceAll('<master_gain>', replacement['<master_gain>']);
 
         //Send processed code to Strudel Repl
         globalEditor.setCode(processedText);

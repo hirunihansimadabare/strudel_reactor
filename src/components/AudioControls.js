@@ -1,5 +1,4 @@
 import React from 'react';
-import { getAudioContext } from '@strudel/webaudio';
 
 export default function AudioControls({
   onPlay,
