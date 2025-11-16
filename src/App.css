@@ -188,6 +188,37 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
   display: block;
 }
 
+.volume-slider{
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(45, 212, 191, 0.25);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  border: 2px solid #a8fff5;
+  box-shadow:
+    0 0 8px rgba(45, 212, 191, 0.9),
+    0 0 16px rgba(45, 212, 191, 0.5);
+  transition: 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 12px #2dd4bf,
+    0 0 24px rgba(45, 212, 191, 0.8);
+}
+
 .row.align-items-stretch > .col-lg-6,
 .row.align-items-stretch > .col-lg-3 {
   display: flex;

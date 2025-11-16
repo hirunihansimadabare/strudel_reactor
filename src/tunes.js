@@ -95,7 +95,7 @@ stack(
   .rarely(jux(rev)),
 )
 //Remixed and reproduced from Algorave Dave's code found here: https://www.youtube.com/watch?v=ZCcpWzhekEY
-// all(x => x.gain(mouseX.range(0,1)))
+all(x => x.gain(<volume>))
 // all(x => x.log())
 
 // @version 1.2`;

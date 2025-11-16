@@ -1,7 +1,7 @@
 import './App.css';
 import { useCallback, useEffect, useRef, useState } from "react";
 import { StrudelMirror } from '@strudel/codemirror';
-import { evalScope } from '@strudel/core';
+import { control, evalScope } from '@strudel/core';
 import { drawPianoroll } from '@strudel/draw';
 import { initAudioOnFirstClick, getAudioContext, webaudioOutput, registerSynthSounds } from '@strudel/webaudio';
 import { registerSoundfonts } from '@strudel/soundfonts';
@@ -37,13 +37,19 @@ export function loadControlsState(controlsState){
         const serializedState = localStorage.getItem(local_storage_key);
         if (serializedState === null) {
             // Return initial default state if nothing is found
-            return { p1_Radio: 'ON', instrument: 'supersaw'};
+            return { p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8};
         }
         console.log('Control state loaded');
-        return JSON.parse(serializedState);
+        const saved=  JSON.parse(serializedState);
+        return {
+            p1_Radio: saved.p1_Radio ?? "ON", 
+            instrument: saved.instrument ?? "supersaw",
+            volume: saved.volume ?? 0.8,
+            ...saved
+        }
     } catch (e) {
         console.error('Could not load state', e);
-        return {p1_Radio: 'ON', instrument: 'supersaw'};
+        return {p1_Radio: 'ON', instrument: 'supersaw', volume: 0.8};
     }
 }
 
@@ -80,6 +86,10 @@ export function ProcessText(controlsState) {
 
   //Instrument logic
   finalReplacement['<instrument_tag>'] = `"${controlsState.instrument}"`;
+
+  const vol = typeof controlsState.volume === "number" ? controlsState.volume: 0.8;
+  finalReplacement["<volume>"] = vol.toFixed(2);
+
   return finalReplacement;
 }
 
@@ -103,7 +113,8 @@ export default function StrudelDemo() {
         //Apply the replacement to the song
         .replaceAll('<p1_Radio>', replacement['<p1_Radio>'])
         //Apply new instrument tag replacement
-        .replaceAll('<instrument_tag>', replacement['<instrument_tag>']);
+        .replaceAll('<instrument_tag>', replacement['<instrument_tag>'])
+        .replaceAll('<volume>', replacement['<volume>']);
 
         //Send processed code to Strudel Repl
         globalEditor.setCode(processedText);
@@ -223,6 +234,14 @@ return (
                     onStop={handleStop}
                     onPreProcess={Proc}
                     onProcAndPlay={handleProcAndPlay}
+                    volume={controlsState.volume}
+                    setVolume={(vol) =>
+                        setControlsState((prev) => {
+                            const updated = {...prev, volume: vol};
+                            saveControlsState(updated);
+                            return updated;
+                        })
+                    }
                   />
               </div>
 
