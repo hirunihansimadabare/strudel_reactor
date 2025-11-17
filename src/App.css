@@ -29,7 +29,7 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 /* cards */
 .card-box {
   background: rgba(20, 20, 30, 0.85);
-  border: 2px solid rgba(45, 212, 191, 0.4);
+  border: 2px solid var(--accent); 
   border-radius: 20px;
   padding: 18px;
   transition: all 0.3s ease-in-out;
@@ -71,16 +71,16 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 }
 
 .card-box h5.section-title {
-  text-shadow: 0 0 6px rgba(45, 212, 191, 0.5);
+  text-shadow: 0 0 6px var(--accent);
 }
 
 /* neon ring on hover */
 .card-box:hover {
-  border-color: #2dd4bf; 
+  border-color: var(--accent); 
   box-shadow:
-    0 0 10px rgba(45, 212, 191, 0.8),
-    0 0 30px rgba(45, 212, 191, 0.4),
-    0 0 60px rgba(45, 212, 191, 0.2);
+    0 0 10px var(--accent),
+    0 0 30px color-mix(in srgb, var(--accent) 60%, transparent),
+    0 0 60px color-mix(in srgb, var(--accent) 40%, transparent);
   transform: translateY(-3px);
   background: rgba(30, 30, 45, 0.9);
 }
@@ -130,15 +130,15 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 
 .btn {
   background: rgba(45, 212, 191, 0.08);
-  border: 2px solid rgba(45, 212, 191, 0.8);
+  border: 2px solid var(--accent);
   border-radius: 10px;
   color: var(--text);
   font-weight: 600;
   letter-spacing: 0.3px;
   padding: 10px 16px;
   box-shadow: 
-    0 0 6px rgba(4, 255, 222, 0.4),
-    inset 0 0 4px rgba(11, 248, 217, 0.2);
+    0 0 6px var(--accent),
+    inset 0 0 4px color-mix(in srgb, var(--accent) 40%, transparent);
   transition: 
     background 0.2s ease,
     box-shadow 0.2s ease,
@@ -147,12 +147,12 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 }
 
 .btn:hover {
-  background: rgba(45, 212, 191, 0.2);
-  border-color: #2dd4bf;
+  background: rgba(45, 212, 191, 0.2); /* optional: can also tie this to accent later */
+  border-color: var(--accent);
   box-shadow: 
-    0 0 12px #2dd4bf,
-    0 0 30px rgba(45, 212, 191, 0.6),
-    inset 0 0 8px rgba(45, 212, 191, 0.4);
+    0 0 12px var(--accent),
+    0 0 30px color-mix(in srgb, var(--accent) 60%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--accent) 50%, transparent);
   transform: translateY(-1.5px);
 }
 

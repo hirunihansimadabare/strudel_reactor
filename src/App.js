@@ -32,6 +32,13 @@ function getSongCode(song) {
     }
   }
 
+const songAccentMap = {
+    default: '#2dd4bf',
+    alt1: '#f97316',
+    alt2: '#a855f7', 
+    alt3: '#22c55e', 
+};
+
 {/* JSON Handling */ }
 //function to save the current state
 export function saveControlsState(controlsState){
@@ -225,10 +232,16 @@ export default function StrudelDemo() {
     }, [Proc]);
 
     useEffect(() => {
-        setEditorText(getSongCode(controlsState.song));
+        // load the correct song template into the editor
+        const songCode = getSongCode(controlsState.song);
+        setEditorText(songCode);
+      
+        // Update the global accent colour based on song
+        const accent = songAccentMap[controlsState.song] || songAccentMap.default;
+        document.documentElement.style.setProperty('--accent', accent);
     }, [controlsState.song]);
 
-    // --The layout--
+// --The layout--
 return (
     <div>
       <h2 className="visually-hidden">Strudel Demo</h2>
