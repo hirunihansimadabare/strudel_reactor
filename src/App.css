@@ -106,9 +106,85 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 .audio-column {
   display: flex;
   flex-direction: row;
-  gap: 3rem;
+  gap: 16px;
   position: relative;
   z-index: 10;
+}
+
+.ac-card {
+  flex: 1 1 auto; 
+}
+.audio-controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ac-section {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  padding: 10px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ac-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ac-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
+}
+
+.ac-caption {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.ac-chip {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.ac-speed-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ac-speed-input {
+  max-width: 90px;
+  background: rgba(10, 12, 20, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text);
+  text-align: center;
+}
+
+.ac-speed-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.5);
+}
+
+/* Speed error text */
+.ac-error {
+  color: #f97373;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  text-align: center;
 }
 
 /* Strudel demo card*/
@@ -147,7 +223,7 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
 }
 
 .btn:hover {
-  background: rgba(45, 212, 191, 0.2); /* optional: can also tie this to accent later */
+  background: rgba(45, 212, 191, 0.2);
   border-color: var(--accent);
   box-shadow: 
     0 0 12px var(--accent),
@@ -217,6 +293,16 @@ body { background: radial-gradient(1200px 900px at 10% -10%, #1a2030 0%, var(--b
   box-shadow:
     0 0 12px #2dd4bf,
     0 0 24px rgba(45, 212, 191, 0.8);
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  cursor: pointer;
 }
 
 .row.align-items-stretch > .col-lg-6,

@@ -77,8 +77,8 @@ export default function PreProcessingControls({controlsState, onControlChange, o
         <div className="card-box">
             <h5 className="section-title text-start mb-3">Preset File Management</h5>
             <div className="d-flex gap-2 mb-3">
-                <button className="btn btn-info flex-fill" onClick={onExportState}>Export Preset</button>
-                <button className="btn btn-info flex-fill" onClick={handleImportClick}>Import Preset</button>
+                <button className="btn btn-outline-light flex-fill" onClick={onExportState}>Export Preset</button>
+                <button className="btn btn-outline-light flex-fill" onClick={handleImportClick}>Import Preset</button>
                 <input type="file" ref={fileInputRef} onChange={onImportState} style={{ display: "none" }} accept=".json"/>
             </div>
         </div>
