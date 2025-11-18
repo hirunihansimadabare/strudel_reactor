@@ -81,9 +81,9 @@ The interface also includes a dynamic D3 graph and a neon theme that changes bas
 
 ### Preprocessing and Playback controls
 
-`Preprocess` : Applies all current control settings like speed, volume, mute, song selection etc... into the Strudel Code
-`Proc & Play` : Runs preprocessing and immediately plays the updated melody
-`Play` : Plays the current strudel code in the editor
+`Preprocess` : Applies all current control settings like speed, volume, mute, song selection etc... into the Strudel Code <br />
+`Proc & Play` : Runs preprocessing and immediately plays the updated melody <br />
+`Play` : Plays the current strudel code in the editor <br />
 `Stop` : Stops all active music 
 
 ### Volume controls
