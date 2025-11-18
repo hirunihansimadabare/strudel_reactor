@@ -12,19 +12,23 @@ export default function AudioControls({
 }) {
   
   const [speedInput, setSpeedInput] = useState(speed.toFixed(2));
+  // Holds any error message for invalid input
   const [speedError, setSpeedError] = useState('');
 
+  // Sync textbox with slider/state whenever speed changes externally
   useEffect(() => {
     setSpeedInput(speed.toFixed(2));
     setSpeedError('');
   }, [speed]);
 
+  //Volume
   const handleVolumeChange = (e) => {
     const vol = Number(e.target.value);
     if (Number.isNaN(vol)) return;
     setVolume(vol);
   };
 
+  // Speed
   const handleSpeedSliderChange = (e) => {
     const s = Number(e.target.value);
     if (Number.isNaN(s)) return;
@@ -36,6 +40,7 @@ export default function AudioControls({
     setSpeedInput(e.target.value);
   };
   
+  // Validate textbox
   const commitSpeedFromInput = () => {
     if (speedInput === '') {
       setSpeedError('Speed cannot be empty.');
