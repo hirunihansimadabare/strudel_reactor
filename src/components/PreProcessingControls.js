@@ -75,7 +75,7 @@ export default function PreProcessingControls({controlsState, onControlChange, o
 
         {/* JSON Export/Import Section*/}
         <div className="card-box">
-            <h5 className="section-title text-start mb-3">Preset File Management</h5>
+            <h5 className="section-title text-start mb-3 text-center">Preset File Management</h5>
             <div className="d-flex gap-2 mb-3">
                 <button className="btn btn-outline-light flex-fill" onClick={onExportState}>Export Preset</button>
                 <button className="btn btn-outline-light flex-fill" onClick={handleImportClick}>Import Preset</button>

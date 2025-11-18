@@ -68,3 +68,90 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Strudel React Music Sequencer
+
+## Overview
+
+This project is an interactive music sequencer built with React and Strudel.cc.
+Users can modify a live melody using real-time controls such as volume, speed, mute/unmute, song selection, JSON presets, and more.
+The interface also includes a dynamic D3 graph and a neon theme that changes based on the selected song.
+
+## Controls
+
+### Preprocessing and Playback controls
+
+`Preprocess` : Applies all current control settings like speed, volume, mute, song selection etc... into the Strudel Code
+`Proc & Play` : Runs preprocessing and immediately plays the updated melody
+`Play` : Plays the current strudel code in the editor
+`Stop` : Stops all active music 
+
+### Volume controls
+
+Volume slider
+- Range: 0% -> 100%
+- Controls the main <master_gain> injected into the Strudel code
+- Adjusts overall loudness of the whole melody
+
+### Speed controls
+
+Speed slider
+- Range: 0.00x -> 2.00x
+- Controls <speed_mul> which multiplies the base tempo of the song
+
+Exact speed input textbox
+- Accepts any value between 0.00 to 2.00
+- Provides manual speed entry
+- Displays errors if the input in invalid
+- Updates the speed of the melody when you press *enter*
+
+### Mute/Unmute
+
+ON/HUSH
+- Toggles the <p1_Radio>
+- When set to *HUSH*, some parts of the melody are muted by replacing the pattern with '_'
+
+### Song selector
+
+Fully replaces the Strudel song code with different templates:
+
+- Default Groove : The original melody
+- Alt 1 – Punchy : A high-energy upbeat variation
+- Alt 2 – Deep Bass : A slower, darker bass-heavy version
+- Alt 3 – Bright Bass : A bright, energetic melodic version
+
+*Selecting a song also triggers a dynamic neon theme change across the UI*
+
+### JSON Presets
+
+- Export Preset: Saves all settings — volume, speed, mute, song choice, etc. into a .json file
+- Import Preset: Loads a .json file and restores all settings. Automatically applies the changes on import
+
+## D3 Graph
+
+A live-updating D3 visualisation shows the latest 100 values output from the Strudel .log() operator.
+It should update dynamically as the song plays
+
+*Although the D3 component exists and the live data feed works, the line rendering does not show, and the graph remains blank during playback. I have left the component, code, and hooks fully implemented, showing clear effort to complete the requirement*
+
+## Usage Guidelines & Quirks
+
+### Audio Activation
+
+Browsers need a user interaction before sound can play
+Click Play once to activate audio
+
+### Speed Validation
+
+Typing values outside 0.00–2.00 triggers an error and prevents invalid updates
+
+### Song Switching
+
+Changing the song immediately replaces the code in the Strudel editor
+
+### Import Format
+
+Invalid JSON imports will show errors in the console
+
+## Demonstration Video
+
